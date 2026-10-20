@@ -163,10 +163,10 @@ const PALETTE = [
 // n: こたえのブロック数, T: 手前に来るまでの秒数
 const LEVELS = [
   { n: 2, T: 9.0, name: 'はじめて',     stars: '★☆☆☆☆' },
-  { n: 3, T: 7.0, name: 'なれてきた',   stars: '★★☆☆☆' },
-  { n: 4, T: 5.6, name: 'いちにんまえ', stars: '★★★☆☆' },
-  { n: 5, T: 4.4, name: 'たつじん',     stars: '★★★★☆' },
-  { n: 6, T: 3.5, name: 'でんせつ',     stars: '★★★★★' },
+  { n: 3, T: 6.2, name: 'なれてきた',   stars: '★★☆☆☆' },
+  { n: 4, T: 4.4, name: 'いちにんまえ', stars: '★★★☆☆' },
+  { n: 5, T: 3.1, name: 'たつじん',     stars: '★★★★☆' },
+  { n: 6, T: 2.2, name: 'でんせつ',     stars: '★★★★★' },
 ];
 const MODES = [
   { id: 'life',     label: '❤️ ライフ3つ' },
@@ -288,7 +288,7 @@ function nextQuestion() {
   const q = pickQuestion();
   const { nums, ci } = makeChoices(q.a, q.b, lv.n);
   G.prevKey = q.key; G.asked[q.key] = (G.asked[q.key] || 0) + 1;
-  const T = lv.T * Math.max(0.65, 1 - G.combo * 0.02);
+  const T = lv.T * Math.max(0.75, 1 - G.combo * 0.02);
   G.row = {
     q, T, d: 1.0, age: 0, phase: 'approach', t: 0,
     ci, chosen: -1, ok: false, bonus: 0, remainFrac: 1, pending: false,
@@ -355,7 +355,7 @@ function buildMenu() {
     lv.appendChild(b);
   });
   const L = curLevel();
-  $('lvInfo').textContent = `Lv${settings.level} ${L.name}: こたえのブロック ${L.n}つ ／ ${L.T <= 4.4 ? 'とてもはやい' : L.T <= 5.6 ? 'はやい' : L.T <= 7 ? 'ふつう' : 'ゆっくり'}スピード`;
+  $('lvInfo').textContent = `Lv${settings.level} ${L.name}: こたえのブロック ${L.n}つ ／ ${L.T <= 2.2 ? 'さいそく' : L.T <= 3.1 ? 'とてもはやい' : L.T <= 4.4 ? 'はやい' : L.T <= 6.2 ? 'ふつう' : 'ゆっくり'}スピード`;
   const dansEl = $('dans'); dansEl.innerHTML = '';
   for (let d = 1; d <= 9; d++) {
     const b = document.createElement('button');
